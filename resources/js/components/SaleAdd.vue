@@ -64,7 +64,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="(item, i) in form.sales" :key="i">
+                <tr class="text-center" v-for="(item, i) in form.sales" :key="i">
                   <td>{{ item.product.code }}</td>
                   <td>{{ item.product.name }}</td>
                   <td>{{ item.product.price }}</td>
@@ -230,7 +230,7 @@ export default {
       const response = await axios.post("/sales", this.form);
       if (response.data.message == "success") {
         this.resetForm();
-        window.location.href = `/sale/nota/${response.data.sale.id}`;
+        window.open(`/sale/nota/${response.data.sale.id}`, '_blank');
       }
     },
     resetForm() {

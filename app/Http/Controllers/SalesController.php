@@ -74,6 +74,10 @@ class SalesController extends Controller
                     'product_id' => $sales['product']['id'],
                     'qty' => $sales['qty']
                 ]);
+
+                $product = Product::find($sales['product']['id']);
+                $product->stock = $product->stock - $sales['qty'];
+                $product->save();
             }
 
             return response()->json([

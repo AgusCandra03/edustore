@@ -10,11 +10,6 @@
 @section('content')
 <div id="controller">
     <div class="card">
-      <div class="card-header">
-        <div class="row">
-          <a class="btn btn-success btn-sm" href="{{route('printDetail')}}" target="_blank"><i class="fa fa-print"></i> Print PDF</a>
-        </div>
-      </div>
       <div class="card-body">
         <table id="datatable" class="table table-bordered table-striped">
             <thead>
@@ -24,8 +19,8 @@
                 <th>Date</th>
                 <th>Cashier</th>
                 <th>Customer</th>
+                <th>Total Product</th>
                 <th>Total</th>
-                <th>Action</th>
             </tr>
             </thead>
         </table>
@@ -54,17 +49,12 @@ var apiUrl ='{{ url('api/sale_details') }}';
 
 var columns = [
     {data: 'DT_RowIndex', class: 'text-center', orderable:false},
-    {data: 'sale_id', class: 'text-center', orderable: true},
+    {data: 'id', class: 'text-center', orderable: true},
     {data: 'date', class: 'text-center', orderable: false},
-    {data: 'sales.users.name', class: 'text-center', orderable: false},
-    {data: 'sales.members.name', class: 'text-center', orderable: false},
-    {data: 'sales.total', class: 'text-center', orderable: false},
-    {render: function (index,row, data, meta){
-      return `
-        <a class="btn btn-success btn-sm" onclick="href='sale_details/receipt'" target="_blank">Print</a>
-        <a class="btn btn-danger btn-sm" onclick="controller.deleteData(event, ${data.id})">Delete</a>
-      `;
-    }, orderable: false, width: '200px', class:'text-center'},
+    {data: 'users.name', class: 'text-center', orderable: false},
+    {data: 'member_name', class: 'text-center', orderable: false},
+    {data: 'total_product', class: 'text-center', orderable: false},
+    {data: 'total', class: 'text-center', orderable: false},
 ];
 
 var controller = new Vue({
@@ -92,15 +82,7 @@ var controller = new Vue({
             _this.datas = _this.table.ajax.json().data;
         });
     },
-    deleteData(event, id){
-      if(confirm("Are You Sure ?")){
-        $(event.target).parents('tr').remove()
-        axios.post(this.actionUrl+'/'+id, {_method: 'DELETE'}).then(response => {
-          alert('Data has been removed');
-        });
-      }
-    },
-    },
+  },
 });
 </script>
 @endsection

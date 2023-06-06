@@ -34,14 +34,22 @@ class SaleDetailController extends Controller
 
     public function api(Request $request)
     {
-        // $details = SaleDetail::with('users', 'products', 'sales.users', 'sales.members')->get();
-        $details = SaleDetail::with('sales', 'products', 'sales.users', 'sales.members');
-        $datatables = datatables()->of($details)
-            ->addColumn('date', function ($details) {
-                return convert_date($details->created_at);
-            })
-            ->addIndexColumn();
-
+        $sales = Sales::with('users', 'members', 'sale_details.products')->get();
+        $datatables = datatables()->of($sales)
+        ->addColumn('date', function ($sales) {
+            return convert_date($sales->created_at);
+        })
+        ->addColumn('total_product', function ($row) {
+            return $row->sale_details->count();
+        })
+        ->addColumn('member_name', function ($row) {
+            if ($row->member_id == null) {
+                return '-';
+            } else {
+                return $row->members->name;
+            }
+        })
+        ->addIndexColumn();
         return $datatables->make(true);
     }
     /**
@@ -50,32 +58,16 @@ class SaleDetailController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function printDetail()
-    {
-        $details = SaleDetail::with(['sales', 'sales.users'])->get();
-
-        $pdf = Pdf::loadView('admin/printDetail', ['sale_details' => $details]);
-        return $pdf->stream('ReportSales.pdf');
-    }
-
-    public function receipt()
-    {
-        $details = SaleDetail::with(['sales', 'sales.users'])->get();
-
-        $pdf = Pdf::loadView('admin/receipt', ['sale_details' => $details]);
-        return $pdf->download('Receipt.pdf');
-    }
-
     public function nota($id)
     {
         $sale = Sales::with(['sale_details'])->find($id);
         $pdf = Pdf::loadView('admin.nota', ['sale' => $sale]);
 
         // to preview
-        // return $pdf->stream();
+        return $pdf->stream('nota.pdf');
 
         // to download
-        return $pdf->download('nota.pdf');
+        // return $pdf->download('nota.pdf');
     }
 
     public function create()
