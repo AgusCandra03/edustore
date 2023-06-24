@@ -4,7 +4,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>EduStore | Point Of Sale</title>
+  <link rel="icon" href="{{ asset('assets/dist/img/edustore-logo.png') }}" type="image/x-icon">
+  <title>
+    EduStore | Point Of Sale
+  </title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -44,7 +47,7 @@
 
   <!-- Preloader -->
   <div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__shake" src="{{asset('assets/dist/img/edustore-logo.png')}}" alt="AdminLTELogo" height="60" width="60">
+    <img class="animation__shake" src="{{asset('assets/dist/img/edustore-logo.png')}}" alt="Edustore Logo" height="150" width="150">
   </div>
 
   <!-- Navbar -->
@@ -58,18 +61,12 @@
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
-      {{-- fullscreen --}}
-      {{-- <li class="nav-item">
-        <a class="nav-link" data-widget="fullscreen" href="#" role="button">
-          <i class="fas fa-expand-arrows-alt"></i>
-        </a>
-      </li> --}}
 
       {{-- Profile --}}
       <div class="collapse navbar-collapse" id="navbar-list-4">
         <ul class="navbar-nav">
             <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle form-control" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <img src="{{asset('assets/dist/img/admin-logo.png')}}" style="width: 2vw" class="img-circle" alt="User Image">
               {{ auth()->user()->name }}
             </a>
@@ -93,15 +90,14 @@
 
 
   <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+  <aside class="main-sidebar sidebar-light-primary elevation-2">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
+    <a href="#" class="brand-link">
       <img src="{{asset('assets/dist/img/edustore-logo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       @php
         $setting = App\Models\Setting::first();
       @endphp
-      <span class="brand-text font-weight-light">{{ $setting->name }}</span>
-
+      <span class="brand-text font-weight-light"><b> {{ $setting->name }}</b></span>
     </a>
 
     <!-- Sidebar -->
@@ -249,13 +245,13 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-  <footer class="main-footer">
+  {{-- <footer class="main-footer">
     <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
     All rights reserved.
     <div class="float-right d-none d-sm-inline-block">
       <b>Version</b> 3.1.0
     </div>
-  </footer>
+  </footer> --}}
 
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">

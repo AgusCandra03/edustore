@@ -4,6 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="{{ asset('assets/dist/img/edustore-logo.png') }}" type="image/x-icon">
   <title>EduStore | Log in</title>
 
   <!-- Google Font: Source Sans Pro -->
@@ -14,6 +15,13 @@
   <link rel="stylesheet" href="{{ asset('assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css')}}">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ asset('assets/dist/css/adminlte.min.css')}}">
+  <style>
+    body {
+      background-image: url('{{ asset('assets/dist/img/background-supermarket.jpg') }}');
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+  </style>
 </head>
 <body class="hold-transition login-page">
 @yield('content')
